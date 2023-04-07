@@ -1,7 +1,19 @@
 import Input from "@/components/Input";
 import Image from "next/image";
+import { ChangeEvent, useCallback, useState } from "react";
 
 const Auth = () => {
+  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [variant, setVariant] = useState("login");
+  const toggleVariant = useCallback(() => {
+    setVariant((currentVariant) =>
+      currentVariant === "login" ? "register" : "login",
+    );
+  }, []);
+
   return (
     <div
       className={
@@ -25,10 +37,56 @@ const Auth = () => {
             }
           >
             <h2 className={"text-white text-4xl mb-8 font-semibold"}>
-              Sign in
+              {variant === "login" ? "Sign in" : "Register"}
             </h2>
             <div className={"flex flex-col gap-4"}>
-              <Input />
+              {variant === "register" && (
+                <Input
+                  label={"Username"}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setUserName(e.target.value)
+                  }
+                  id={"username"}
+                  type={"username"}
+                  value={userName}
+                />
+              )}
+              <Input
+                label={"Email"}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setEmail(e.target.value)
+                }
+                id={"email"}
+                type={"email"}
+                value={email}
+              />
+              <Input
+                label={"Password"}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
+                id={"password"}
+                type={"password"}
+                value={password}
+              />
+              <button
+                className={
+                  "bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
+                }
+              >
+                {variant === "login" ? "Sign in" : "Register"}
+              </button>
+              <p className={"text-neutral-500 mt-12"}>
+                {variant === "login"
+                  ? "First time using Netflix?"
+                  : "Already have an account?"}
+                <span
+                  onClick={toggleVariant}
+                  className={"text-white ml-1 hover:underline cursor-pointer"}
+                >
+                  {variant === "login" ? "Create an account" : "Sign in"}
+                </span>
+              </p>
             </div>
           </div>
         </div>

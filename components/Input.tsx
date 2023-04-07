@@ -1,6 +1,8 @@
+import { ChangeEvent } from "react";
+
 interface InputProps {
   id: string;
-  onChange: any;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: string;
   label: string;
   type?: string;
