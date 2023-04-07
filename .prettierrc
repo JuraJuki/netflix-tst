@@ -1,9 +1,10 @@
 {
-  "printWidth": 80,
+  "printWidth": 100,
   "tabWidth": 2,
   "trailingComma": "all",
   "semi": true,
   "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "plugins": ["prettier-plugin-prisma"]
 }
