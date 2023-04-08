@@ -1,18 +1,50 @@
 import Input from "@/components/Input";
+import axios from "axios";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { ChangeEvent, useCallback, useState } from "react";
 
 const Auth = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const [variant, setVariant] = useState("login");
   const toggleVariant = useCallback(() => {
-    setVariant((currentVariant) =>
-      currentVariant === "login" ? "register" : "login",
-    );
+    setVariant((currentVariant) => (currentVariant === "login" ? "register" : "login"));
   }, []);
+
+  const resetForm = () => {
+    setEmail("");
+    setUserName("");
+    setPassword("");
+  };
+
+  const login = useCallback(async () => {
+    try {
+      await signIn("credentials", { email, password, redirect: false, callbackUrl: "/" });
+      resetForm();
+      router.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }, [email, password, router]);
+
+  const register = useCallback(async () => {
+    try {
+      await axios.post("/api/register", {
+        email,
+        name,
+        password,
+      });
+      resetForm();
+      login();
+    } catch (err) {
+      console.log(err);
+    }
+  }, [email, password, login]);
 
   return (
     <div
@@ -22,13 +54,7 @@ const Auth = () => {
     >
       <div className={"bg-black w-full h-full lg:bg-opacity-50"}>
         <nav className="px-12 py-5">
-          <Image
-            src="/images/logo.png"
-            alt="Logo"
-            width={178}
-            height={48}
-            className={"h-12"}
-          />
+          <Image src="/images/logo.png" alt="Logo" width={178} height={48} className={"h-12"} />
         </nav>
         <div className={"flex justify-center"}>
           <div
@@ -43,9 +69,7 @@ const Auth = () => {
               {variant === "register" && (
                 <Input
                   label={"Username"}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setUserName(e.target.value)
-                  }
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => setUserName(e.target.value)}
                   id={"username"}
                   type={"username"}
                   value={userName}
@@ -53,18 +77,14 @@ const Auth = () => {
               )}
               <Input
                 label={"Email"}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setEmail(e.target.value)
-                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 id={"email"}
                 type={"email"}
                 value={email}
               />
               <Input
                 label={"Password"}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setPassword(e.target.value)
-                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 id={"password"}
                 type={"password"}
                 value={password}
@@ -73,13 +93,12 @@ const Auth = () => {
                 className={
                   "bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
                 }
+                onClick={variant === "login" ? login : register}
               >
                 {variant === "login" ? "Sign in" : "Register"}
               </button>
               <p className={"text-neutral-500 mt-12"}>
-                {variant === "login"
-                  ? "First time using Netflix?"
-                  : "Already have an account?"}
+                {variant === "login" ? "First time using Netflix?" : "Already have an account?"}
                 <span
                   onClick={toggleVariant}
                   className={"text-white ml-1 hover:underline cursor-pointer"}
