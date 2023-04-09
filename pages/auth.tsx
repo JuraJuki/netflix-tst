@@ -2,13 +2,11 @@ import Input from "@/components/Input";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { ChangeEvent, useCallback, useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 const Auth = () => {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -26,13 +24,12 @@ const Auth = () => {
 
   const login = useCallback(async () => {
     try {
-      await signIn("credentials", { email, password, redirect: false, callbackUrl: "/" });
+      await signIn("credentials", { email, password, callbackUrl: "/profiles" });
       resetForm();
-      router.push("/");
     } catch (err) {
       console.log(err);
     }
-  }, [email, password, router]);
+  }, [email, password]);
 
   const register = useCallback(async () => {
     try {
@@ -104,7 +101,7 @@ const Auth = () => {
                   className={
                     "w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transform"
                   }
-                  onClick={() => signIn("google", { callbackUrl: "/" })}
+                  onClick={() => signIn("google", { callbackUrl: "/profiles" })}
                 >
                   <FcGoogle />
                 </div>
@@ -112,7 +109,7 @@ const Auth = () => {
                   className={
                     "w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transform"
                   }
-                  onClick={() => signIn("github", { callbackUrl: "/" })}
+                  onClick={() => signIn("github", { callbackUrl: "/profiles" })}
                 >
                   <FaGithub />
                 </div>
