@@ -6,7 +6,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "GET") return res.status(405).end();
 
   try {
-    await serverAuth(req);
+    await serverAuth(req, res);
 
     const movies = await prismadb.movie.findMany();
 
