@@ -71,7 +71,7 @@ const Navbar = () => {
             onClick={toggleAccounteMenu}
             className={"flex flex-row items-center gap-2 cursor-pointer relative"}
           >
-            <div className={"w-6 h-6 lg:w-10 rounded-md overflow-hidden"}>
+            <div className={"w-6 h-6 lg:w-10 lg:h-9 rounded-md overflow-hidden"}>
               <img src="/images/default-green.png" alt="profile" />
             </div>
             <BsChevronDown

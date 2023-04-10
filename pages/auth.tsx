@@ -35,7 +35,7 @@ const Auth = () => {
     try {
       await axios.post("/api/register", {
         email,
-        name,
+        name: userName,
         password,
       });
       resetForm();
