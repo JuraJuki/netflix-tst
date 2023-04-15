@@ -1,8 +1,14 @@
 import FavoriteButton from "@/components/FavoriteButton";
+import useInfoModal from "@/hooks/useInfoModal";
 import isEmpty from "lodash/isEmpty";
+import { useRouter } from "next/router";
+import { BiChevronDown } from "react-icons/bi";
 import { BsFillPlayFill } from "react-icons/bs";
 
 const MovieCard = ({ data }: { data: Record<string, any> }) => {
+  const router = useRouter();
+  const { openModal } = useInfoModal();
+
   if (isEmpty(data)) return null;
 
   return (
@@ -33,7 +39,7 @@ const MovieCard = ({ data }: { data: Record<string, any> }) => {
         >
           <div className={"flex flex-row items-center gap-3"}>
             <div
-              onClick={() => {}}
+              onClick={() => router.push(`/watch/${data?.id}`)}
               className={
                 "cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full items-center flex justify-center transition hover:bg-neutral-300"
               }
@@ -41,6 +47,12 @@ const MovieCard = ({ data }: { data: Record<string, any> }) => {
               <BsFillPlayFill />
             </div>
             <FavoriteButton movieId={data?.id} />
+            <div
+              onClick={() => openModal(data?.id)}
+              className="cursor-pointer ml-auto group/item w-6 h-6 lg:w-10 lg:h-10 border-white border-2 rounded-full flex justify-center items-center transition hover:border-neutral-400"
+            >
+              <BiChevronDown size={30} className={"text-white group-hover/item:text-neutral-300"} />
+            </div>
           </div>
           <p className={"text-green-400 font-semibold mt-4 "}>
             New <span className={"text-white"}>2023</span>

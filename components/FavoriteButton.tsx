@@ -12,7 +12,7 @@ const FavoriteButton = ({ movieId }: { movieId: string }) => {
     const list = currentUser?.favoriteIds || [];
 
     return list.includes(movieId);
-  }, []);
+  }, [currentUser?.favoriteIds, movieId]);
 
   const toggleFavorites = useCallback(async () => {
     let response;

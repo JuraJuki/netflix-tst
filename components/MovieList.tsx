@@ -4,8 +4,6 @@ import isEmpty from "lodash/isEmpty";
 const MovieList = ({ data, title }: { data: Record<string, any>; title: string }) => {
   if (isEmpty(data)) return null;
 
-  console.log(data);
-
   const movies = () => data.map((movie) => <MovieCard key={movie.id} data={movie} />);
 
   return (

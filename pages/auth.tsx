@@ -43,7 +43,7 @@ const Auth = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [email, password, login]);
+  }, [email, userName, password, login]);
 
   return (
     <div
