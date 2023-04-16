@@ -4,7 +4,11 @@ import axios from "axios";
 import { useCallback, useMemo } from "react";
 import { AiOutlineCheck, AiOutlinePlus } from "react-icons/ai";
 
-const FavoriteButton = ({ movieId }: { movieId: string }) => {
+export interface FavoriteButtonProps {
+  movieId: string;
+}
+
+const FavoriteButton = ({ movieId }: FavoriteButtonProps) => {
   const { mutate: updateFavorites } = useFavorites();
   const { data: currentUser, mutate } = useCurrentUser();
 

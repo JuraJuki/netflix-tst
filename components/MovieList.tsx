@@ -1,7 +1,12 @@
 import MovieCard from "@/components/MovieCard";
 import isEmpty from "lodash/isEmpty";
 
-const MovieList = ({ data, title }: { data: Record<string, any>; title: string }) => {
+export interface MovieListProps {
+  data: Record<string, any>;
+  title: string;
+}
+
+const MovieList = ({ data, title }: MovieListProps) => {
   if (isEmpty(data)) return null;
 
   const movies = () => data.map((movie) => <MovieCard key={movie.id} data={movie} />);

@@ -1,4 +1,8 @@
-const MobileMenu = (props: { visible?: boolean }) => {
+export interface MobileMenuProps {
+  visible?: boolean;
+}
+
+const MobileMenu = (props: MobileMenuProps) => {
   if (!props.visible) return null;
   return (
     <div className={"bg-black w-56 absolute top-8 left-0 py-5 flex-col border-2 border-gray-700"}>

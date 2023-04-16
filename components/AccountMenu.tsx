@@ -1,7 +1,11 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { signOut } from "next-auth/react";
 
-const AccountMenu = (props: { visible?: boolean }) => {
+export interface AccountMenuProp {
+  visible?: boolean;
+}
+
+const AccountMenu = (props: AccountMenuProp) => {
   const { data } = useCurrentUser();
 
   if (!props.visible) return null;

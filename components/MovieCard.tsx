@@ -5,7 +5,11 @@ import { useRouter } from "next/router";
 import { BiChevronDown } from "react-icons/bi";
 import { BsFillPlayFill } from "react-icons/bs";
 
-const MovieCard = ({ data }: { data: Record<string, any> }) => {
+export interface MovieCardProps {
+  data: Record<string, any>;
+}
+
+const MovieCard = ({ data }: MovieCardProps) => {
   const router = useRouter();
   const { openModal } = useInfoModal();
 

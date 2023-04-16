@@ -5,8 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 const serverAuth = async (req: NextApiRequest, res: NextApiResponse) => {
-  // @ts-ignore
-  const session = await getServerSession(req, res, authOptions);
+  const session = await getServerSession(req as any, res as any, authOptions as any);
 
   if (!session?.user?.email) throw new Error("Not signed in");
 

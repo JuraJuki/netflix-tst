@@ -13,8 +13,6 @@ const BillBoard = () => {
     openModal(data?.id);
   }, [openModal, data?.id]);
 
-  console.log(data);
-
   return (
     <div className={"relative h-[56.25vw]"}>
       <video

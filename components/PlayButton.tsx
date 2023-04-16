@@ -1,7 +1,11 @@
 import { useRouter } from "next/router";
 import { BsFillPlayFill } from "react-icons/bs";
 
-const PlayButton = ({ movieId }: { movieId: string }) => {
+export interface PlayButtonProps {
+  movieId: string;
+}
+
+const PlayButton = ({ movieId }: PlayButtonProps) => {
   const router = useRouter();
 
   return (

@@ -5,7 +5,12 @@ import useMovie from "@/hooks/useMovie";
 import { useCallback, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
-const InfoModal = ({ visible, onClose }: { visible?: boolean; onClose: any }) => {
+export interface InfoModalProps {
+  visible?: boolean;
+  onClose: any;
+}
+
+const InfoModal = ({ visible, onClose }: InfoModalProps) => {
   const [isVisible, setIsVisible] = useState(!!visible);
 
   const { movieId } = useInfoModal();
